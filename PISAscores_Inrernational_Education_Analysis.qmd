@@ -334,17 +334,34 @@ pisa_asian_countries <- pisa_wide |>
   count(country, name = "N_participations") |>
   left_join(avg_scores, by = "country")
 
-ggplot(pisa_asian_countries,
-       aes(x = reorder(country, -avg_score), y = N_participations, fill = country)) +
-  geom_col(show.legend = FALSE) +
-  geom_text(aes(label = paste0("avg: ", avg_score)), vjust = -0.5, size = 4) +
+plot_1_2 <- ggplot(pisa_asian_countries, aes(x = reorder(country, -(avg_scores$avg_score)),
+             y = N_participations,
+             fill = avg_scores$avg_score)) +
+  geom_col() +
+  geom_text(
+    aes(label = paste0("avg: ", avg_scores$avg_score)),
+    vjust = -0.5,
+    size = 4
+  ) +
+  scale_fill_gradientn(
+    colours = c("#a8c8e8", "#5b9dc9", "#2166ac", "#0a3d6b"),
+    name = "Avg Score",
+    guide = guide_colorbar(
+      title.position = "top",
+      barwidth = 10,
+      barheight = 1
+    )
+  ) +
   labs(
     title = "Asia: Number of PISA Participations VS Score",
     x = "Country",
     y = "Number of Participations"
   ) +
-  theme_custom() +
-  theme(axis.title.y = element_text())
+  theme_custom()  + theme(
+    axis.title.y = element_text(),
+    legend.position = "bottom",
+    legend.title = element_text(hjust = 0.5)
+  )
 ```
 
 :::: {.column-screen-inset}

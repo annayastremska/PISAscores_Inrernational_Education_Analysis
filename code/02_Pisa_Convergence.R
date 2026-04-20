@@ -14,7 +14,7 @@ pisa_convergence <- pisa_country |>
   group_by(country, continent) |>
   summarise(
     first_score = avg_score[TIME == min(TIME)],
-    last_score  = avg_score[TIME == max(TIME)],
+    last_score = avg_score[TIME == max(TIME)],
     .groups = "drop"
   ) |>
   mutate(change = last_score - first_score)
@@ -22,7 +22,7 @@ pisa_convergence <- pisa_country |>
 # label only top 5 and bottom 5 by change
 label_countries <- c(
   pisa_convergence |> arrange(desc(change)) |> slice_head(n = 5) |> pull(country),
-  pisa_convergence |> arrange(change)       |> slice_head(n = 5) |> pull(country)
+  pisa_convergence |> arrange(change) |> slice_head(n = 5) |> pull(country)
 )
 
 # plot
@@ -47,12 +47,12 @@ plot_2 <- pisa_convergence |>
   scale_colour_manual(values = cb10) +
   theme_custom() +
   theme(
-    legend.direction  = "horizontal",
-    legend.text       = element_text(size = rel(0.95), colour = "#2E3250"),
+    legend.direction = "horizontal",
+    legend.text = element_text(size = rel(0.95), colour = "#2E3250"),
     legend.key.width  = unit(20, "pt"),
     legend.key.height = unit(2, "pt"),
-    legend.spacing.x  = unit(6, "pt"),
-    axis.title        = element_text(size = rel(0.98), colour = "#4A4E6A")
+    legend.spacing.x = unit(6, "pt"),
+    axis.title = element_text(size = rel(0.98), colour = "#4A4E6A")
   )
 
 print(plot_2)
@@ -92,18 +92,18 @@ pisa_convergence |>
 #Wealthy developed countries experience a downfall in performance
 
 #TOP AND BOTTOM PERFORMERS CLOSER LOOK
-top3    <- pisa_convergence |> arrange(desc(first_score)) |> slice_head(n = 3) |> pull(country)
-bottom3 <- pisa_convergence |> arrange(first_score)      |> slice_head(n = 3) |> pull(country)
-# top3:    Finland, Canada, New Zealand
+top3 <- pisa_convergence |> arrange(desc(first_score)) |> slice_head(n = 3) |> pull(country)
+bottom3 <- pisa_convergence |> arrange(first_score) |> slice_head(n = 3) |> pull(country)
+# top3: Finland, Canada, New Zealand
 # bottom3: Indonesia, Brazil, Chile
 
 slope_colours <- c(
-  "Finland"     = "#7F77DD",
-  "Canada"      = "#D85A30",
+  "Finland" = "#7F77DD",
+  "Canada" = "#D85A30",
   "New Zealand" = "#D4537E",
-  "Indonesia"   = "#378ADD",
-  "Brazil"      = "#1D9E75",
-  "Chile"       = "#BA7517"
+  "Indonesia" = "#378ADD",
+  "Brazil" = "#1D9E75",
+  "Chile" = "#BA7517"
 )
 
 slope_data <- pisa_convergence |>
@@ -123,37 +123,37 @@ plot_2_2 <- slope_data |>
   geom_line(linewidth = 1.2) +
   geom_point(size = 3.5) +
   ggrepel::geom_text_repel(
-    data          = \(d) filter(d, period == "First\n2000"),
-    aes(label     = paste0(country, "  ", round(score))),
-    direction     = "y",
-    hjust         = 1,
-    nudge_x       = -0.15,
+    data = \(d) filter(d, period == "First\n2000"),
+    aes(label = paste0(country, "  ", round(score))),
+    direction = "y",
+    hjust = 1,
+    nudge_x = -0.15,
     segment.color = NA,
-    size          = 3.4
+    size = 3.4
   ) +
   ggrepel::geom_text_repel(
-    data          = \(d) filter(d, period == "Last\n2018"),
-    aes(label     = round(score)),
-    direction     = "y",
-    hjust         = 0,
-    nudge_x       = 0.15,
+    data = \(d) filter(d, period == "Last\n2018"),
+    aes(label = round(score)),
+    direction = "y",
+    hjust = 0,
+    nudge_x = 0.15,
     segment.color = NA,
-    size          = 3.4
+    size = 3.4
   ) +
   facet_wrap(~ group, scales = "free_y") +
   scale_colour_manual(values = slope_colours, name = NULL) +
   scale_x_discrete(expand = expansion(add = c(2.2, 1.0))) +
   labs(
-    title   = "PISA Score Change: Top VS Bottom Initial Scorers",
-    x       = NULL,
-    y       = "Average PISA score",
+    title = "PISA Score Change: Top VS Bottom Initial Scorers",
+    x = NULL,
+    y = "Average PISA score",
     caption = "Source: PISA / OECD"
   ) +
   theme_custom() +
   theme(
     strip.background = element_rect(fill = "#2E3250", colour = NA),
-    strip.text       = element_text(colour = "white", face = "bold"),
-    strip.placement  = "outside"
+    strip.text = element_text(colour = "white", face = "bold"),
+    strip.placement = "outside"
   )
 
 ggsave("plots/2.2 Top VS Bottom Inital Scorers Over Time.png",

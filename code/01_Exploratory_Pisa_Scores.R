@@ -91,10 +91,10 @@ my_colours <- cb10[1:5]
 names(my_colours) <- c("Americas", "Asia", "Europe", "OECD Average", "Oceania")
 
 asia_spike_label <- tibble(
-  subject   = c("math_score", "reading_score", "science_score"),
-  TIME      = 2015,
+  subject = c("math_score", "reading_score", "science_score"),
+  TIME = 2015,
   avg_score = c(516, 494, 508),
-  label     = c("SGP, HKG,\nTWN, MAC\njoined", "", "")
+  label = c("SGP, HKG,\nTWN, MAC\njoined", "", "")
 )
 
 plot_1 <- ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = continent)) +
@@ -116,7 +116,7 @@ plot_1 <- ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = con
   ) +
   facet_wrap(~ subject, nrow = 1,
              labeller = as_labeller(c(
-               math_score    = "Math",
+               math_score = "Math",
                reading_score = "Reading",
                science_score = "Science"
              ))) +
@@ -130,21 +130,21 @@ plot_1 <- ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = con
   ) +
   scale_x_continuous(breaks = seq(2000, 2018, 6)) +
   labs(
-    title    = "PISA scores by continent, 2000–2018",
+    title = "PISA scores by continent, 2000–2018",
     subtitle = "Oceania is leading?",
-    caption  = "Source: PISA / OECD",
-    colour   = NULL
+    caption = "Source: PISA / OECD",
+    colour = NULL
   ) +
   theme_custom() +
   theme(
-    plot.subtitle       = ggtext::element_markdown(size = rel(0.85), colour = "#4A4E6A",
+    plot.subtitle = ggtext::element_markdown(size = rel(0.85), colour = "#4A4E6A",
                                                    hjust = 0.5, margin = margin(b = 12, t =10)),
-    legend.position     = "top",
-    legend.direction    = "horizontal",
-    legend.text         = element_text(size = rel(0.85), colour = "#2E3250"),
-    legend.key.width    = unit(20, "pt"),
-    legend.key.height   = unit(2, "pt"),
-    legend.spacing.x    = unit(6, "pt"),
+    legend.position = "top",
+    legend.direction = "horizontal",
+    legend.text = element_text(size = rel(0.85), colour = "#2E3250"),
+    legend.key.width = unit(20, "pt"),
+    legend.key.height = unit(2, "pt"),
+    legend.spacing.x = unit(6, "pt"),
   )
 
 print(plot_1)
@@ -201,12 +201,21 @@ pisa_asian_countries <- pisa_wide |>
 
 plot_1_2 <- ggplot(pisa_asian_countries, aes(x = reorder(country, -(avg_scores$avg_score)),
              y = N_participations,
-             fill = country)) +
-  geom_col(show.legend = FALSE) +
+             fill = avg_scores$avg_score)) +
+  geom_col() +
   geom_text(
     aes(label = paste0("avg: ", avg_scores$avg_score)),
     vjust = -0.5,
     size = 4
+  ) +
+  scale_fill_gradientn(
+    colours = c("#a8c8e8", "#5b9dc9", "#2166ac", "#0a3d6b"),
+    name = "Avg Score",
+    guide = guide_colorbar(
+      title.position = "top",
+      barwidth = 10,
+      barheight = 1
+    )
   ) +
   labs(
     title = "Asia: Number of PISA Participations VS Score",
@@ -214,7 +223,9 @@ plot_1_2 <- ggplot(pisa_asian_countries, aes(x = reorder(country, -(avg_scores$a
     y = "Number of Participations"
   ) +
   theme_custom()  + theme(
-    axis.title.y = element_text()
+    axis.title.y = element_text(),
+    legend.position = "bottom",
+    legend.title = element_text(hjust = 0.5)
   )
 
 ggsave("plots/1.2 Asia--Number of PISA Participations VS Score.png", plot_1_2, width = 11, height = 5, dpi = 150)

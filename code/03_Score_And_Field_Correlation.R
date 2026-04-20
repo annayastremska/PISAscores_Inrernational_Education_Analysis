@@ -13,7 +13,7 @@ pisa <- pisa_wide |>
                names_to = "subject", values_to = "score") |>
   mutate(
     subject = str_remove(subject, "_score"),
-    iso3c   = countrycode(country, "country.name", "iso3c")
+    iso3c = countrycode(country, "country.name", "iso3c")
   ) |>
   summarise(avg_score = mean(score, na.rm = TRUE), .by = c(iso3c, subject))
 
@@ -27,10 +27,10 @@ fields <- read_excel("data/OD25_Intl-Student-Census_Tables.xlsx",
   filter(!is.na(total), !str_detect(country, "^\\*|^Note")) |>
   mutate(
     across(total:undeclared, as.numeric),
-    iso3c               = countrycode(str_trim(country), "country.name", "iso3c"),
-    n_math_cs           = total * math_cs             / 100,
+    iso3c = countrycode(str_trim(country), "country.name", "iso3c"),
+    n_math_cs = total * math_cs / 100,
     n_physical_sciences = total * physical_life_sciences / 100,
-    n_humanities        = total * humanities           / 100
+    n_humanities = total * humanities / 100
   ) |>
   select(iso3c, total, n_math_cs, n_physical_sciences, n_humanities)
 
@@ -85,9 +85,9 @@ plot_3 <- ggplot(dat, aes(avg_score, students_per_million)) +
   scale_y_log10(labels = scales::comma) +
   scale_colour_manual(values = cb10) +
   labs(
-    title   = "Score and Adjacent Field of Study Correlation",
-    x       = "Average PISA Score",
-    y       = "Students in matched field per million population (log)",
+    title = "Score and Adjacent Field of Study Correlation",
+    x = "Average PISA Score",
+    y = "Students in matched field per million population (log)",
     caption = "Sources: PISA (OECD), Open Doors 2025 International Student Census; population: World Bank 2019"
   ) +
   theme_custom() +

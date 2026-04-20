@@ -7,7 +7,7 @@ country_meta <- gisco_countrycode |>
   select(ISO3_CODE, country = iso.name.en)
 
 pisa_avg <- bind_rows(
-  pisamath_reg    |> select(country, Value),
+  pisamath_reg |> select(country, Value),
   pisareading_reg |> select(country, Value),
   pisascience_reg |> select(country, Value)
 ) |>
@@ -30,7 +30,7 @@ population <- WDI(country = "all", indicator = "SP.POP.TOTL", start = 2020, end 
 #Merge & plot
 plot_4 <- pisa_avg |>
   inner_join(students, by = "iso3c") |>
-  inner_join(pop,      by = "iso3c") |>
+  inner_join(pop, by = "iso3c") |>
   filter(iso3c != "USA") |>
   mutate(students_per_million = N_Students / pop_millions) |>
   ggplot(aes(avg_pisa_score, students_per_million)) +
@@ -47,9 +47,9 @@ plot_4 <- pisa_avg |>
   ) +
   scale_y_log10(labels = scales::comma) +
   labs(
-    title   = "IT'S A TRAP! PISA Score vs Undergraduate Students per Million (US)",
-    x       = "Average PISA Score",
-    y       = "Undergraduate Students per Million (log scale)",
+    title = "IT'S A TRAP! PISA Score vs Undergraduate Students per Million (US)",
+    x = "Average PISA Score",
+    y = "Undergraduate Students per Million (log scale)",
     caption = "Sources: PISA (OECD), Open Doors 2025; population: World Bank 2020"
   ) +
   theme_custom() +
