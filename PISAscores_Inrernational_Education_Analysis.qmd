@@ -236,7 +236,6 @@ pisa_wide <- pisamath_reg |>
 
 *Does educational performance differ systematically by continent, and has it been converging or diverging over time?*
 
-
 ```{r continent-trends}
 #| label: continent-trends
 #| fig-height: 4.5
@@ -299,14 +298,13 @@ ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = continent)) +
   )
 ```
 
-:::: {.column-screen-inset}
-![](plots/1.1 Pisa Scores by Continent Over Time.png)
-::::
-
-::: {.fig-caption}
-fig. 1.1 Pisa Scores by Continent Over Time
+::: column-screen-inset
+![](plots/1.1%20Pisa%20Scores%20by%20Continent%20Over%20Time.png)
 :::
 
+::: fig-caption
+fig. 1.1 Pisa Scores by Continent Over Time
+:::
 
 ::: callout-note
 ### Why does Oceania look so strong?
@@ -364,11 +362,11 @@ plot_1_2 <- ggplot(pisa_asian_countries, aes(x = reorder(country, -(avg_scores$a
   )
 ```
 
-:::: {.column-screen-inset}
-![](plots/1.2 Asia--Number of PISA Participations VS Score.png)
-::::
+::: column-screen-inset
+![](plots/1.2%20Asia--Number%20of%20PISA%20Participations%20VS%20Score.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 1.2 Asian Participants VS Score
 :::
 
@@ -439,11 +437,11 @@ pisa_convergence |>
   )
 ```
 
-:::: {.column-screen-inset}
-![](plots/2.1 Convergence in PISA Scores.png)
-::::
+::: column-screen-inset
+![](plots/2.1%20Convergence%20in%20PISA%20Scores.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 2.1 Convergence in PISA Scores
 :::
 
@@ -451,7 +449,7 @@ The downward-sloping trend is clear: countries that started low improved; countr
 
 **Top improvers:** Luxembourg, Poland, Chile, Turkey, Latvia
 
--   **Poland and Latvia** implemented  education reforms during this period
+-   **Poland and Latvia** implemented education reforms during this period
 -   **Chile and Turkey** were among the fastest-growing economies in their regions; rising incomes and school enrollment rates likely contributed
 -   **Luxembourg** is something of an outlier: its early scores were depressed by a highly multilingual student population taking the test in a foreign language
 
@@ -520,11 +518,11 @@ slope_data |>
   )
 ```
 
-:::: {.column-screen-inset}
-![](plots/2.2 Top VS Bottom Inital Scorers Over Time.png)
-::::
+::: column-screen-inset
+![](plots/2.2%20Top%20VS%20Bottom%20Inital%20Scorers%20Over%20Time.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 2.2 Top VS Bottom Inital Scorers Over Time
 :::
 
@@ -613,11 +611,11 @@ ggplot(dat, aes(avg_score, students_per_million)) +
   theme(axis.title = element_text(size = rel(0.88), colour = "#4A4E6A"))
 ```
 
-:::: {.column-screen-inset}
-![](plots/3.1 Score_And_Field_Correlation.png)
-::::
+::: column-screen-inset
+![](plots/3.1%20Score_And_Field_Correlation.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 3.1 Score And Field of Study Correlation
 :::
 
@@ -687,11 +685,11 @@ pisa_avg |>
   theme(axis.title = element_text(size = rel(0.88), colour = "#4A4E6A"))
 ```
 
-:::: {.column-screen-inset}
-![](plots/4.1 Score_VS_Undergraduate Students_per_Million_USA.png)
-::::
+::: column-screen-inset
+![](plots/4.1%20Score_VS_Undergraduate%20Students_per_Million_USA.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 4.1 Score VS Number of Students
 :::
 
@@ -743,11 +741,11 @@ science_gap_2018 <- pisa_wide |>
   mutate(iso3c = fct_inorder(iso3c))
 ```
 
-:::: {.column-screen-inset}
-![](plots/5.1 Gender_Gap_All_Subjects.png)
-::::
+::: column-screen-inset
+![](plots/5.1%20Gender_Gap_All_Subjects.png)
+:::
 
-::: {.fig-caption}
+::: fig-caption
 fig. 5.1 Gender Gap
 :::
 
@@ -768,7 +766,7 @@ Public discourse focuses heavily on women in STEM and rarely on men in humanitie
 ## Summary & Conclusions
 
 | Question | Finding |
-|------------------------------------|------------------------------------|
+|----|----|
 | **Who is performing best by continent?** | Oceania leads — but this reflects the absence of lower-income Pacific nations from the sample, not continental superiority. |
 | **Is Asia really that good?** | The four top-scoring Asian economies (Singapore, Hong Kong, Macao, Taiwan) are genuine standouts. Their limited participation inflates the continental average in select years. |
 | **Are low-scorers catching up?** | Yes, there is clear convergence. Low-scorers improved (Chile, Poland, Turkey, Latvia); high-scorers stagnated or declined (Finland, New Zealand, the Netherlands). |
@@ -776,9 +774,10 @@ Public discourse focuses heavily on women in STEM and rarely on men in humanitie
 | **Does PISA predict study-abroad volume?** | Weakly (r = 0.4). Scores explain *what* students study more than *whether* they study abroad. |
 | **Are gender gaps universal?** | Girls' reading advantage is universal. Boys' math advantage is widespread but not universal. Science is genuinely mixed. |
 
-::: {.unlisted}
+::: unlisted
 The most important takeaway may be structural: **PISA measures what the tested countries can demonstrate, not what all countries are doing**. Additional data must be studied to draw specific conclusions about the population, economics, and national standards of education.
 :::
+
 ------------------------------------------------------------------------
 
 *Analysis conducted in R using `tidyverse`, `ggplot2`, `ggrepel`, `patchwork`, and `WDI`. Data sources: PISA / OECD; Open Doors 2025 International Student Census; World Bank WDI.*
