@@ -2389,25 +2389,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    pisascience_reg <span class="sc">|&gt;</span> <span class="fu">select</span>(country, continent, SUBJECT, TIME, <span class="at">science_score =</span> Value),</span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;continent&quot;</span>, <span class="st">&quot;TIME&quot;</span>, <span class="st">&quot;SUBJECT&quot;</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>gdp_data <span class="ot">&lt;-</span> <span class="fu">WDI</span>(</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">indicator =</span> <span class="st">&quot;NY.GDP.PCAP.KD&quot;</span>,</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">start =</span> <span class="dv">2000</span>,</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">end =</span> <span class="dv">2020</span>,</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">extra =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>gdp_clean <span class="ot">&lt;-</span> gdp_data <span class="sc">|&gt;</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">LOCATION =</span> iso3c, <span class="at">TIME =</span> year, <span class="at">GDP =</span> NY.GDP.PCAP.KD, income) <span class="sc">|&gt;</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(GDP))</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>pisa_with_gdp <span class="ot">&lt;-</span> pisa_final_l <span class="sc">|&gt;</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(gdp_clean, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;LOCATION&quot;</span>, <span class="st">&quot;TIME&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_score =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(Math, Reading, Science)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">continent =</span> <span class="fu">countrycode</span>(LOCATION, <span class="at">origin =</span> <span class="st">&quot;iso3c&quot;</span>, <span class="at">destination =</span> <span class="st">&quot;continent&quot;</span>)</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
   </section></div>

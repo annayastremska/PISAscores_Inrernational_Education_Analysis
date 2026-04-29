@@ -212,24 +212,6 @@ pisa_wide <- pisamath_reg |>
     pisascience_reg |> select(country, continent, SUBJECT, TIME, science_score = Value),
     by = c("country", "continent", "TIME", "SUBJECT")
   )
-
-gdp_data <- WDI(
-  indicator = "NY.GDP.PCAP.KD",
-  start = 2000,
-  end = 2020,
-  extra = TRUE
-)
-
-gdp_clean <- gdp_data |>
-  select(LOCATION = iso3c, TIME = year, GDP = NY.GDP.PCAP.KD, income) |>
-  filter(!is.na(GDP))
-
-pisa_with_gdp <- pisa_final_l |>
-  left_join(gdp_clean, by = c("LOCATION", "TIME")) |>
-  mutate(
-    avg_score = rowMeans(across(c(Math, Reading, Science)), na.rm = TRUE),
-    continent = countrycode(LOCATION, origin = "iso3c", destination = "continent")
-  )
 ```
 
 ```{=html}
