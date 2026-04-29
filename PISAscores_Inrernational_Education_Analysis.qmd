@@ -1,19 +1,18 @@
 ---
 title: "What PISA Tells Us About Global Education"
-subtitle: "Trends, Convergence, and Insights About Student Performance, 2000–2018"
 author: "Anna Yastremska"
-date: 04/17/2026
+date: ""
 format:
   html:
     theme:
       - cosmo
       - custom.scss
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     toc-title: "Contents"
     number-sections: false
     code-fold: true
-    code-tools: true
+    code-tools: false
     fig-width: 12
     fig-height: 5.5
     fig-align: center
@@ -33,65 +32,49 @@ knitr:
 ```{=html}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700&display=swap');
-
-body {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  color: #2E3250;
-  line-height: 1.7;
-}
-
-h1, h2, h3 {
-  color: #1A1E3A;
-  font-weight: 700;
-}
-
-.callout-note {
-  border-left-color: #1170AA;
-}
-
-.callout-tip {
-  border-left-color: #57A44C;
-}
-
-.callout-warning {
-  border-left-color: #FC7D0B;
-}
-
-.callout-important {
-  border-left-color: #C85200;
-}
-
-.lead {
-  font-size: 0.7 rem;
-  color: #4A4E6A;
-  font-weight: 300;
-}
-
-.insight-box {
-  background: #EEF0F8;
-  border-left: 4px solid #1170AA;
-  padding: 1rem 1.25rem;
-  border-radius: 0 6px 6px 0;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
-}
-
-.fig-caption {
-  text-align: center;
-  font-size: 0.85rem;
-  color: #8A8FA8;
-  font-style: italic;
-  margin-top: 0.3rem;
-  margin-bottom: 1.5rem;
-}
-
-.quarto-figure, figure, p > img {
-  max-width: 100%;
-  overflow: hidden;
-}
+body { font-family: 'Bricolage Grotesque', sans-serif; color: #2E3250; line-height: 1.7; }
+h1, h2, h3 { color: #1A1E3A; font-weight: 700; }
+h4 { font-weight: 400; font-size: 0.92rem; color: #8A8FA8; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.callout-note  { border-left-color: #1170AA; }
+.callout-tip   { border-left-color: #57A44C; }
+.callout-warning   { border-left-color: #FC7D0B; }
+.callout-important { border-left-color: #C85200; }
+.lead { font-size: 1.05rem; color: #4A4E6A; font-weight: 300; }
+.insight-box { background: #EEF0F8; border-left: 4px solid #1170AA; padding: 1rem 1.25rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; font-size: 0.95rem; }
+.fig-caption { text-align: center; font-size: 0.82rem; color: #8A8FA8; font-style: italic; margin-top: 0.2rem; margin-bottom: 1rem; }
+.column-screen-inset img, .quarto-figure img, figure img, p > img { width: 860px; max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.column-screen-inset { margin-top: 0.5rem; margin-bottom: 0; padding: 0; text-align: center; }
+.fig-caption + hr, .fig-caption + p, .fig-caption + h2, .fig-caption + h3, .fig-caption + h4 { margin-top: 0.75rem; }
+hr { margin: 1.75rem 0; }
+details.code-fold { margin-bottom: 0.5rem; }
+#TOC a, #TOC li > a, #TOC li > a strong, #TOC li > a b { font-weight: 400 !important; white-space: normal; word-break: break-word; }
+#TOC .active > a { font-weight: 600 !important; }
+#TOC ul ul { display: none !important; }
+#quarto-margin-sidebar { overflow-x: hidden; }
+.subquestion { font-size: 1.08rem; color: #2E3250; font-style: italic; font-weight: 400; background: linear-gradient(90deg, #EEF0F8 0%, transparent 100%); border-left: 3px solid #1170AA; padding: 0.55rem 1rem 0.55rem 1rem; border-radius: 0 6px 6px 0; margin: 0 0 1.2rem 0; display: block; }
+.report-hero-inner details.code-fold > summary, .report-hero-inner .code-fold-btn { background: rgba(255,255,255,0.15) !important; color: #ffffff !important; border-color: rgba(255,255,255,0.3) !important; border-radius: 4px; padding: 0.2rem 0.6rem; }
 </style>
-```
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Inject "Data & Setup" into TOC if Quarto missed it (heading is inside raw HTML div)
+  var toc = document.querySelector("#TOC > ul");
+  if (toc && !document.querySelector('#TOC a[href="#data-setup"]')) {
+    var li = document.createElement("li");
+    li.className = "toc-item";
+    var a = document.createElement("a");
+    a.href = "#data-setup";
+    a.textContent = "Data & Setup";
+    li.appendChild(a);
+    toc.insertBefore(li, toc.firstChild);
+  }
+  // Hide all nested TOC lists (show only top-level sections)
+  document.querySelectorAll("#TOC ul ul").forEach(function(ul) {
+    ul.style.display = "none";
+  });
+});
+</script>
+```
 ```{r setup}
 #| label: setup
 #| include: false
@@ -153,17 +136,20 @@ theme_custom <- function(base_size = 12, base_family = "bricolage") {
 }
 ```
 
-------------------------------------------------------------------------
+```{=html}
+<div class="report-hero">
+  <div class="report-hero-inner">
+```
 
 ::: lead
-Every three years, the OECD tests half a million 15-year-olds across dozens of countries in math, reading, and science. The result is PISA — arguably the most comprehensive snapshot of what the world's students can do. This report digs into six rounds of that data, from 2000 to 2018, to ask: *who is improving, who is falling behind, and does any of it actually matter downstream?*
+Every three years, the OECD tests half a million 15-year-olds across dozens of countries in math, reading, and science. The result is PISA — a snapshot of what the world's students can do. This report explores the data (2000 - 2018) from three main perspectives: **economic trends, geographical concentration of skills, and gender gap.**
 :::
 
 ------------------------------------------------------------------------
 
 ## Data & Setup
 
-The analysis draws on three OECD PISA datasets (math, reading, science) merged with geographic metadata, international student enrollment figures from *Open Doors 2025*, and World Bank population estimates. Each row represents an individual student.
+The analysis draws on three OECD PISA datasets (math, reading, science) merged with geographic metadata, international student enrollment figures from *Open Doors 2025*, and World Bank population and GDP estimates. Each row represents an individual student.
 
 ```{r load-data}
 #| label: load-data
@@ -226,15 +212,42 @@ pisa_wide <- pisamath_reg |>
     pisascience_reg |> select(country, continent, SUBJECT, TIME, science_score = Value),
     by = c("country", "continent", "TIME", "SUBJECT")
   )
+
+gdp_data <- WDI(
+  indicator = "NY.GDP.PCAP.KD",
+  start = 2000,
+  end = 2020,
+  extra = TRUE
+)
+
+gdp_clean <- gdp_data |>
+  select(LOCATION = iso3c, TIME = year, GDP = NY.GDP.PCAP.KD, income) |>
+  filter(!is.na(GDP))
+
+pisa_with_gdp <- pisa_final_l |>
+  left_join(gdp_clean, by = c("LOCATION", "TIME")) |>
+  mutate(
+    avg_score = rowMeans(across(c(Math, Reading, Science)), na.rm = TRUE),
+    continent = countrycode(LOCATION, origin = "iso3c", destination = "continent")
+  )
+```
+
+```{=html}
+  </div>
+</div>
 ```
 
 ------------------------------------------------------------------------
 
-## 1. The Global Picture
+## I. Global Performance
 
-### Hypothesis
+### The Global Picture
 
-*Does educational performance differ systematically by continent, and has it been converging or diverging over time?*
+#### Hypothesis
+
+::: subquestion
+Does educational performance differ systematically by continent, and has it been converging or diverging over time?
+:::
 
 ```{r continent-trends}
 #| label: continent-trends
@@ -299,7 +312,7 @@ ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = continent)) +
 ```
 
 ::: column-screen-inset
-![](plots/1.1%20Pisa%20Scores%20by%20Continent%20Over%20Time.png)
+![](plots/1.1 Pisa Scores by Continent Over Time.png)
 :::
 
 ::: fig-caption
@@ -309,12 +322,14 @@ fig. 1.1 Pisa Scores by Continent Over Time
 ::: callout-note
 ### Why does Oceania look so strong?
 
-`Oceania` in this dataset consists entirely of **Australia and New Zealand** — two wealthy, English-speaking OECD members. Less developed Pacific island nations do not participate in PISA. This is a structural bias: the regions that look best are often those where the lower-performing countries simply aren't in the room. India, for instance, has never participated at the national level.
+`Oceania` in this dataset consists entirely of **Australia and New Zealand** — two wealthy, English-speaking OECD members. Less developed Pacific island nations do not participate in PISA. This is a structural bias: regions that look best are often those where the lower-performing countries simply aren't in the room. India, for instance, has never participated.
 :::
 
-### The Asia Spike — A Sampling Story
+### The Asia Spike
 
-Asia's dramatic jump in 2015 is not an educational miracle. It is an artefact of who showed up.
+::: subquestion
+Asia's dramatic jump in 2015 is not an educational miracle. It is a matter of who showed up.
+:::
 
 ```{r asia-participation}
 #| label: asia-participation
@@ -362,25 +377,124 @@ plot_1_2 <- ggplot(pisa_asian_countries, aes(x = reorder(country, -(avg_scores$a
   )
 ```
 
+```{r asia-2009-setup}
+#| eval: true
+#| echo: false
+#| include: false
+
+library(tidyverse)
+library(giscoR)
+
+pisamath <- read_csv('data/pisamath.csv')
+data("gisco_countrycode")
+summary(pisamath) #starts at 2003 !!!
+
+pisamath_reg <- pisamath |>
+  select(LOCATION, SUBJECT, TIME, Value) |> 
+  left_join(gisco_countrycode |>
+              select(ISO3_CODE, continent, country = iso.name.en),
+            by = c("LOCATION" = "ISO3_CODE")) |> 
+  mutate(continent = case_when(
+    LOCATION == "OAVG" ~ "OECD Average",
+    TRUE ~ continent)) |> 
+  select(-LOCATION)
+
+pisamath_reg |>
+  group_by(continent, TIME) |>
+  summarise(avg_score = mean(Value, na.rm=T)) |> 
+  arrange(desc(avg_score)) |> 
+  ggplot(aes(TIME, avg_score)) + geom_line(aes(colour = continent))
+
+#reading scores time series
+pisareading <- read_csv('data/pisareading.csv')
+summary(pisareading) #starts at 2000 !!!
+
+pisareading_reg <- pisareading |>
+  select(LOCATION, SUBJECT, TIME, Value) |> 
+  left_join(gisco_countrycode |>
+              select(ISO3_CODE, continent, country = iso.name.en),
+            by = c("LOCATION" = "ISO3_CODE")) |> 
+  mutate(continent = case_when(
+    LOCATION == "OAVG" ~ "OECD Average",
+    TRUE ~ continent)) |> 
+  select(-LOCATION)
+
+pisareading_reg |>
+  group_by(continent, TIME) |>
+  summarise(avg_score = mean(Value, na.rm=T)) |> 
+  arrange(desc(avg_score)) |> 
+  ggplot(aes(TIME, avg_score)) + geom_line(aes(colour = continent))
+
+#science scores time series
+pisascience <- read_csv('data/pisascience.csv')
+summary(pisascience) #starts at 2006 !!!
+
+pisascience_reg <- pisascience |>
+  select(LOCATION, SUBJECT, TIME, Value) |> 
+  left_join(gisco_countrycode |>
+              select(ISO3_CODE, continent, country = iso.name.en),
+            by = c("LOCATION" = "ISO3_CODE")) |> 
+  mutate(continent = case_when(
+    LOCATION == "OAVG" ~ "OECD Average",
+    TRUE ~ continent)) |> 
+  select(-LOCATION)
+
+
+#united tibble
+pisa_wide <- pisamath_reg |>
+  select(country, continent, SUBJECT, TIME, math_score = Value) |>
+  full_join(
+    pisareading_reg |>
+      select(country, continent, SUBJECT, TIME, reading_score = Value),
+    by = c("country", "continent", "TIME", "SUBJECT")
+  ) |>
+  full_join(
+    pisascience_reg |>
+      select(country, continent, SUBJECT, TIME, science_score = Value),
+    by = c("country", "continent", "TIME", "SUBJECT")
+  )
+```
+
+```{r asia-2009}
+#| eval: true
+#| echo: true
+
+unique(pisa_wide$country[pisa_wide$continent == "Asia" &
+                           pisa_wide$TIME == 2009]) |>
+  knitr::kable(col.names = "Test Participants (Asia, 2009)")
+```
+
+```{r asia-2015}
+#| eval: true
+#| echo: true
+
+unique(pisa_wide$country[pisa_wide$continent == "Asia" &
+                           pisa_wide$TIME == 2015]) |>
+  knitr::kable(col.names = "Test Participants (Asia, 2015)")
+```
 ::: column-screen-inset
-![](plots/1.2%20Asia--Number%20of%20PISA%20Participations%20VS%20Score.png)
+![](plots/1.2 Asia--Number of PISA Participations VS Score.png)
 :::
 
 ::: fig-caption
 fig. 1.2 Asian Participants VS Score
 :::
 
-Singapore (avg: 564), Hong Kong (548), Macao (544), and Taiwan (542) — the top-scoring Asian economies — each participated in **only one round**, joining in 2015. When those city-state powerhouses are included, the continental average soars. When they drop out, it falls back. The score change is entirely compositional, not behavioural.
+Singapore (avg: 564), Hong Kong (548), Macao (544), and Taiwan (542) — the top-scoring Asian economies — each participated in **only one round** — 2015. When those well developed areas are included, the continental average rises. When they drop out, it falls back.
 
 *Perhaps, if high-scoring countries participated steadily, as well as those that never joined, Asia could be the leading continent.*
 
 ------------------------------------------------------------------------
 
-## 2. Convergence: Are Countries Catching Up?
+## II. Convergence
 
-### Hypothesis
+### Are Countries Catching Up?
 
-*Do countries that started with low scores improve over time, while early high-scorers stagnate or decline?*
+#### Hypothesis
+
+::: subquestion
+Do countries that started with low scores improve over time, while early high-scorers stagnate or decline?
+:::
 
 This is the convergence hypothesis, borrowed from growth economics: if educational quality has diminishing returns to existing investment, those behind should have more room to improve.
 
@@ -393,7 +507,7 @@ pisa_country <- pisa_wide |>
   pivot_longer(cols = c(math_score, reading_score, science_score),
                names_to = "subject", values_to = "score") |>
   group_by(country, continent, TIME) |>
-  summarise(avg_score = mean(score, na.rm = TRUE), .groups = "drop")
+  summarise(avg_score = mean(score, na.rm = T), .groups = "drop")
 
 pisa_convergence <- pisa_country |>
   filter(!is.na(country)) |>
@@ -411,7 +525,7 @@ pisa_convergence <- pisa_country |>
 pisa_convergence |>
   ggplot(aes(first_score, change, colour = continent)) +
   geom_point(size = 3) +
-  geom_smooth(method = "lm", se = FALSE, colour = "black",
+  geom_smooth(method = "lm", se = F, colour = "black",
               linetype = "dashed", linewidth = 0.5) +
   geom_hline(yintercept = 0, linetype = "dotted") +
   ggrepel::geom_text_repel(
@@ -438,14 +552,14 @@ pisa_convergence |>
 ```
 
 ::: column-screen-inset
-![](plots/2.1%20Convergence%20in%20PISA%20Scores.png)
+![](plots/2.1 Convergence in PISA Scores.png)
 :::
 
 ::: fig-caption
 fig. 2.1 Convergence in PISA Scores
 :::
 
-The downward-sloping trend is clear: countries that started low improved; countries that started high declined or stagnated. But the outliers are where the story gets interesting.
+The downward-sloping trend is clear: countries that started low improved; countries that started high declined or stagnated.
 
 **Top improvers:** Luxembourg, Poland, Chile, Turkey, Latvia
 
@@ -453,9 +567,11 @@ The downward-sloping trend is clear: countries that started low improved; countr
 -   **Chile and Turkey** were among the fastest-growing economies in their regions; rising incomes and school enrollment rates likely contributed
 -   **Luxembourg** is something of an outlier: its early scores were depressed by a highly multilingual student population taking the test in a foreign language
 
-**Biggest decliners:** Finland, New Zealand, Australia, Iceland, the Netherlands — all wealthy, stable, long-established PISA participants. Whether this reflects genuine educational decline or regression to the mean after an exceptional early run is hard to disentangle.
+**Biggest decliners:** Finland, New Zealand, Australia, Iceland, the Netherlands — all wealthy, stable, long-established PISA participants. Whether this reflects genuine educational decline or regression to the mean is hard to establish without further economic analysis.
 
-### Who Moved Most?
+::: subquestion
+Who Moved Most?
+::: 
 
 ```{r slope-chart}
 #| label: slope-chart
@@ -519,7 +635,7 @@ slope_data |>
 ```
 
 ::: column-screen-inset
-![](plots/2.2%20Top%20VS%20Bottom%20Inital%20Scorers%20Over%20Time.png)
+![](plots/2.2 Top VS Bottom Inital Scorers Over Time.png)
 :::
 
 ::: fig-caption
@@ -530,11 +646,15 @@ The convergence is asymmetric in an important way: the bottom performers improve
 
 ------------------------------------------------------------------------
 
-## 3. Does PISA Score Predict What Students Study?
+## III. Student Specialization & Mobility
 
-### Hypothesis
+### Does PISA Score Predict What Students Study?
 
-*Countries where students score higher in a subject should produce more graduates in the adjacent field — if PISA measures something real about intellectual formation, not just test-taking.*
+#### Hypothesis
+
+::: subquestion
+Countries where students score higher in a subject should produce more graduates in the adjacent field — if PISA measures something real about intellectual formation, not just test-taking.
+:::
 
 The adjacent fields are: **Math → Math/CS**, **Reading → Humanities**, **Science → Physical & Life Sciences**. Student counts come from the 2025 Open Doors international enrollment census, normalized per million population to control for country size.
 
@@ -567,13 +687,13 @@ dat <- pisa |>
   inner_join(pop, by = "iso3c") |>
   mutate(
     n_stem_field = case_when(
-      subject == "math"    ~ n_math_cs,
+      subject == "math" ~ n_math_cs,
       subject == "science" ~ n_physical_sciences,
       subject == "reading" ~ n_humanities
     ),
     students_per_million = n_stem_field / pop_millions,
     subject_label = case_when(
-      subject == "math"    ~ "Math → Math/CS",
+      subject == "math" ~ "Math → Math/CS",
       subject == "science" ~ "Science → Physical & Life Sci",
       subject == "reading" ~ "Reading → Humanities"
     )
@@ -588,15 +708,15 @@ cor_labels <- dat |>
   mutate(label = paste0("r = ", round(r, 2)))
 
 ggplot(dat, aes(avg_score, students_per_million)) +
-  geom_point(aes(colour = subject), size = 2.5, show.legend = FALSE) +
-  geom_smooth(method = "lm", se = TRUE, colour = "grey30",
+  geom_point(aes(colour = subject), size = 2.5, show.legend = F) +
+  geom_smooth(method = "lm", se = T, colour = "grey30",
               fill = "grey80", linetype = "dashed", linewidth = 0.5) +
   geom_text_repel(aes(label = iso3c), size = 2.5, max.overlaps = 20, segment.color = NA) +
   geom_text(
     data = cor_labels,
     aes(label = label),
     x = Inf, y = -Inf, hjust = 1.1, vjust = -1,
-    size = 3.2, colour = "#4A4E6A", fontface = "bold", inherit.aes = FALSE
+    size = 3.2, colour = "#4A4E6A", fontface = "bold", inherit.aes = F
   ) +
   facet_wrap(~subject_label, scales = "free") +
   scale_y_log10(labels = scales::comma) +
@@ -612,7 +732,7 @@ ggplot(dat, aes(avg_score, students_per_million)) +
 ```
 
 ::: column-screen-inset
-![](plots/3.1%20Score_And_Field_Correlation.png)
+![](plots/3.1 Score_And_Field_Correlation.png)
 :::
 
 ::: fig-caption
@@ -624,16 +744,18 @@ The strongest signal is in **Reading → Humanities** : countries where teenager
 ::: callout-warning
 ### Causation caution
 
-This is not evidence that PISA scores *cause* field selection. Wealthier countries both score higher and send more students abroad — GDP is almost certainly a dominant factor. And this dataset only captures students studying in the **United States**; many European countries preferentially send students to the UK or France, which would suppress their apparent counts here.
+This is not evidence that PISA scores *cause* field selection. Wealthier countries both score higher and send more students abroad — *GDP* is almost certainly the dominant factor. Moreover, this dataset only captures students studying in the **United States**; many European countries send students to the UK or France, which would suppress their numbers here.
 :::
 
 ------------------------------------------------------------------------
 
-## 4. Does PISA Predict Total Enrollment Abroad?
+### Does PISA Predict Total Enrollment Abroad?
 
-### Hypothesis
+#### Hypothesis
 
-*If PISA captures genuine human capital, countries with higher scores should send more students abroad overall — not just into matched fields.*
+::: subquestion
+If PISA captures genuine human capital, countries with higher scores should send more students abroad overall — not just into matched fields.
+:::
 
 ```{r undergrad-correlation}
 #| label: undergrad-correlation
@@ -686,24 +808,29 @@ pisa_avg |>
 ```
 
 ::: column-screen-inset
-![](plots/4.1%20Score_VS_Undergraduate%20Students_per_Million_USA.png)
+![](plots/4.1 Score_VS_Undergraduate Students_per_Million_USA.png)
 :::
 
 ::: fig-caption
-fig. 4.1 Score VS Number of Students
+fig. 3.2 Score VS Number of Students
 :::
 
-The correlation drops to **r = 0.4** — weaker than any of the subject-specific correlations, which is revealing. Iceland sends far more students to the US than its PISA score would predict; Germany, Japan, and Finland far fewer.
+The correlation drops to **r = 0.4** — weaker than any of the subject-specific correlations. Hence, PISA explains *field choice* better than it explains *volume*.
 
-**Conclusion:** PISA explains *field choice* better than it explains *volume*. The decision to study abroad at all — and specifically in the US — is dominated by factors outside educational attainment: English language proficiency, family wealth, visa regimes, cultural ties, and the availability of domestic alternatives.
+**Conclusion:** The decision to study abroad at all — and specifically in the US — is dominated by factors outside educational attainment: GDP, English language proficiency, family wealth, visa regimes, cultural ties, and the availability of domestic alternatives.
+
 
 ------------------------------------------------------------------------
 
-## 5. The Gender Gap
+## IV. Gender Gap
 
-### Hypothesis
+### The Gender Gap in Pisa Subjects
 
-*Do boys and girls perform differently across subjects, and is the pattern consistent globally?*
+#### Hypothesis
+
+::: subquestion
+Do boys and girls perform differently across subjects, and is the pattern consistent globally?
+:::
 
 ```{r gender-gap}
 #| label: gender-gap
@@ -742,37 +869,35 @@ science_gap_2018 <- pisa_wide |>
 ```
 
 ::: column-screen-inset
-![](plots/5.1%20Gender_Gap_All_Subjects.png)
+![](plots/5.1 Gender_Gap_All_Subjects.png)
 :::
 
 ::: fig-caption
-fig. 5.1 Gender Gap
+fig. 4.1 Gender Gap
 :::
 
-**Math:** Boys lead almost everywhere. The gap is largest in Latin America and Southern Europe. Interestingly, girls outperform boys in a handful of Northern European countries — where gender equality norms are strongest.
+**Math:** Boys lead almost everywhere. Interestingly, girls outperform boys in Northern European countries — where gender equality norms are strongest.
 
-**Reading:** Girls lead in *every single country*, often by more than boys lead in math. The leading explanation is developmental: girls acquire verbal skills earlier and read more for pleasure, and this holds regardless of cultural context. It is one of the most consistent findings in comparative education.
+**Reading:** Girls lead in *every single country*, often by more than boys lead in math. Something holds regardless of cultural context: girls acquire verbal skills earlier and, allegedly, read more for pleasure. It is one of the most consistent findings in comparative education.
 
-**Science:** Mixed. There is a slight average advantage for boys, but many gaps are close to zero, and the pattern is country-specific. There is no clean STEM story here.
+**Science:** Mixed. There is a slight average advantage for boys, but many gaps are close to zero, and the pattern is country-specific. There is no clean story here.
 
 ::: callout-tip
 ### The asymmetry that gets overlooked
 
-Public discourse focuses heavily on women in STEM and rarely on men in humanities. Both gaps are real, both deserve attention, and they likely have related underlying causes.
+Public discourse focuses heavily on women in STEM and rarely on men in humanities. Both gaps are real, and both deserve attention.
 :::
 
 ------------------------------------------------------------------------
 
 ## Summary & Conclusions
 
-| Question | Finding |
-|----|----|
-| **Who is performing best by continent?** | Oceania leads — but this reflects the absence of lower-income Pacific nations from the sample, not continental superiority. |
-| **Is Asia really that good?** | The four top-scoring Asian economies (Singapore, Hong Kong, Macao, Taiwan) are genuine standouts. Their limited participation inflates the continental average in select years. |
-| **Are low-scorers catching up?** | Yes, there is clear convergence. Low-scorers improved (Chile, Poland, Turkey, Latvia); high-scorers stagnated or declined (Finland, New Zealand, the Netherlands). |
-| **Does PISA predict field choice?** | Moderately — especially for reading → humanities (r = 0.77). But wealth, language, and geography confound the relationship. |
-| **Does PISA predict study-abroad volume?** | Weakly (r = 0.4). Scores explain *what* students study more than *whether* they study abroad. |
-| **Are gender gaps universal?** | Girls' reading advantage is universal. Boys' math advantage is widespread but not universal. Science is genuinely mixed. |
+| Section | Key Insights |
+|---|---|
+| **I. Global Performance** | Oceania is the lead in all three subjects due to biased representation -- Australia and New Zealand. At the same time, the most powerful Asian economies barely participate in pisa, bringing the continental average down. |
+| **II. Convergence** | Convergence is real but asymmetric --- low scorers improved modestly while top scorers declined sharply. Poland and Latvia are the standout reformers.|
+| **III. Student Specialization & Mobility** | PISA scores predict *what* students study better than *how many* go abroad. The reading-to-humanities link is strongest; |
+| **IV. Gender Gap** | Girls lead in reading in every single country; boys lead in math almost everywhere, but that gap shrinks in countries with high levels of gender equality. |
 
 ::: unlisted
 The most important takeaway may be structural: **PISA measures what the tested countries can demonstrate, not what all countries are doing**. Additional data must be studied to draw specific conclusions about the population, economics, and national standards of education.

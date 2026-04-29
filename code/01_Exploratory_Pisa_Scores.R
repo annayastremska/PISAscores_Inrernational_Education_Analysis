@@ -2,6 +2,8 @@
 #What can it tell us?
 
 library(tidyverse)
+library(plotly)
+library(htmlwidgets)
 library(giscoR)
 
 #math scores time series
@@ -85,7 +87,7 @@ pisa_long <- pisa_wide |>
                names_to = "subject",
                values_to = "score") |>
   group_by(continent, TIME, subject) |>
-  summarise(avg_score = mean(score, na.rm = TRUE), .groups = "drop")
+  summarise(avg_score = mean(score, na.rm = T), .groups = "drop")
 
 my_colours <- cb10[1:5]
 names(my_colours) <- c("Americas", "Asia", "Europe", "OECD Average", "Oceania")
@@ -102,7 +104,7 @@ plot_1 <- ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = con
   geom_point(
     data = pisa_long,
     aes(alpha = continent),
-    size = 1.4, show.legend = FALSE
+    size = 1.4, show.legend = F
   ) +
   geom_text(
     data = asia_spike_label,
@@ -112,7 +114,7 @@ plot_1 <- ggplot(pisa_long, aes(TIME, avg_score, colour = continent, alpha = con
     lineheight  = 0.85,
     hjust = -0.1,
     yjust = 2,
-    inherit.aes = FALSE
+    inherit.aes = F
   ) +
   facet_wrap(~ subject, nrow = 1,
              labeller = as_labeller(c(
