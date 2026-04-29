@@ -142,7 +142,7 @@ theme_custom <- function(base_size = 12, base_family = "bricolage") {
 ```
 
 ::: lead
-Every three years, the OECD tests half a million 15-year-olds across dozens of countries in math, reading, and science. The result is PISA — a snapshot of what the world's students can do. This report explores the data (2000 - 2018) from three main perspectives: **economic trends, geographical concentration of skills, and gender gap.**
+Every three years, the OECD tests half a million 15-year-olds across dozens of countries in math, reading, and science. The result is PISA — a snapshot of what the world's students can do. This report explores the data (2000 - 2018) from three main perspectives: **continental performance throughout time, geographical concentration & mobility of skills, and gender gap.**
 :::
 
 ------------------------------------------------------------------------
